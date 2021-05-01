@@ -1,21 +1,14 @@
 class BooksController < ApplicationController
 
   def show
-        @book = Book.joins(:user).find(params[:id])
+    @book = Book.joins(:user).find(params[:id])
     @book_new = Book.new
-  end
-  
-  def show
-    @user = User.find(params[:id])
-    books = Book
-    @books = @user.books
-    @book = Book.new
   end
   
 
   def index
     @books = Book.all
-     @book = Book.new
+    @book = Book.new
   end
 
   def create
@@ -26,12 +19,16 @@ class BooksController < ApplicationController
       redirect_to book_path(book.id)
     else
       flash[:alert] = "error / can't be blank or over 200words"
+      flash[:notice] = "can't be blank"
       redirect_to books_path
     end
   end
 
   def edit
     @book = Book.find(params[:id])
+    unless current_user.id == @book.user_id
+      redirect_to books_path
+    end
   end
 
 
@@ -41,20 +38,20 @@ class BooksController < ApplicationController
     if @book.update(book_params)
       redirect_to book_path(@book), notice: "You have updated book successfully."
     else
-      render "edit"
+      render "edit", notice: "error / can't be blank or over 200words"
     end
   end
 
-  def delete
+  def destroy
     @book = Book.find(params[:id])
-    @book.destoy
+    @book.destroy
     redirect_to books_path
   end
 
   private
 
   def book_params
-    params.require(:book).permit(:title)
+    params.require(:book).permit(:title, :body, :user_id)
   end
 
 end
