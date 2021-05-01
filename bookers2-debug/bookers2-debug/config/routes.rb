@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users,only: [:show,:index,:edit,:update]
   patch 'users_path' => 'users#show'
   resources :books do
+    resources :post_comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
   end
 end
