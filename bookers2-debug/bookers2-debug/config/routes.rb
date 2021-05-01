@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   devise_for :books
   resources :users,only: [:show,:index,:edit,:update]
   patch 'users_path' => 'users#show'
-  resources :books
+  resources :books do
+    resource :favorites, only: [:create, :destroy]
+  end
 end
