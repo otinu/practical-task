@@ -5,8 +5,12 @@ class PostCommentsController < ApplicationController
     comment = book.post_comments.new(post_comment_params)
     comment.book_id = book.id
     comment.user_id = current_user.id
-    comment.save
-    redirect_to book_path(book)
+    if comment.save
+     redirect_to book_path(book)
+    else
+     flash[:notice] = "can't be blank"
+     redirect_to book_path(book)
+    end
   end
 
   def destroy
