@@ -11,6 +11,39 @@
   </tr>
 </table>
 
-<div class='row'>
-  <%= link_to '',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
+<% unless user == current_user %>
+ <div id="follow_form">
+  <% if current_user.follows?(user) %>
+    <%= form_with(model: current_user.active_relationships.find_by(followed_id: user.id),
+            html: { method: :delete }, local: true) do |f| %>
+    <%= f.submit "Unfollow", class: "btn btn-primary" %>
+   <% end %>
+  <% else %>
+    <%= form_with(model: current_user.active_relationships.new, local: true) do |f| %>
+     <div><%= hidden_field_tag :followed_id, user.id %></div>
+     <%= f.submit "Follow", class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+ </div>
+<% end %>
+
+<div>
+  <a href="<%= follows_user_path(user) %>">
+    <strong id="follows" class="stat">
+      <%= user.follows.count %>
+    </strong>
+    follows
+  </a>
+  <a href="<%= followers_user_path(user) %>">
+    <strong id="followers" class="stat">
+      <%= user.followers.count %>
+    </strong>
+    followers
+  </a>
 </div>
+
+<% if user == current_user %>
+ <div class='row'>
+  <%= link_to '',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
+ </div>
+<% end %>

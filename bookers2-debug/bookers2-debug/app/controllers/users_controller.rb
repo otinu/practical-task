@@ -25,6 +25,20 @@ class UsersController < ApplicationController
       render "edit"
     end
   end
+  
+  def follows
+    @title = "Follows"
+    @user  = User.find(params[:id])
+    @users = @user.follows.all
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers.all
+    render 'show_follow'
+  end
 
   private
   def user_params
