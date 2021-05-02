@@ -1,44 +1,24 @@
 <% if @model == "user" %>
-<div class="row  justify-content-center">
-  <h2>ユーザ 一覧</h2>
-</div>
-<div class="row  justify-content-center">
-  <% @datas.each do |datas| %>
-  <table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>ユーザー名</th>
-            </tr>
-       </thead>
-    <tbody>
-        <tr>
-            <td>
-              <%=  datas.name %>
-            </td>
-        </tr>
-    </tbody>
-    </table>
-    <% end %>
-</div>
+ <div class="row">
+   <div class="col-xs-6 col-xs-offset-3" style="margin-left: 20%;">
+   <h2>検索結果</h2>
+ <ul>
+ <% @datas.each do |datas| %>
+   <li><%=  datas.name %></li>
+ <% end %>
+   </ul>
+  </div>
+ </div>
 
 <% elsif @model == "book"%>
-<% @datas.each do |datas| %>
-<div class="row  justify-content-center">
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>タグ一覧</th>
-            </tr>
-       </thead>
-    <tbody>
-        <tr>
-            <td>
-                <%= datas.title %>
-            </td>
-        </tr>
-    </tbody>
-    </table>
-</div>
-<% end %>
-<% else %>
+ <div class="row">
+   <div class="col-xs-6 col-xs-offset-3" style="margin-left: 20%;">
+   <h2>検索結果</h2>
+    <ul>
+     <% @datas.each do |datas| %>
+      <li><%=  datas.title %></li>
+　   <% end %>
+    </ul>
+   </div>
+ </div>
 <% end %>
