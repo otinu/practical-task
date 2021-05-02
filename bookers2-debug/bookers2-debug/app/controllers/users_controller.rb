@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @book = Book.new
+    
+    @q = User.ransack(params[:q])
+    @users_serch = @q.result(distinct: true)
   end
 
   def edit
@@ -51,4 +54,8 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
+  
+  def search_params
+    params.require(:q).permit!
+    
 end
