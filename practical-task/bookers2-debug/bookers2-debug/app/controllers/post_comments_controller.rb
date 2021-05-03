@@ -1,21 +1,26 @@
 class PostCommentsController < ApplicationController
   
   def create
-    book = Book.find(params[:book_id])
-    comment = book.post_comments.new(post_comment_params)
-    comment.book_id = book.id
-    comment.user_id = current_user.id
+    @book = Book.find(params[:book_id])
+    @comment = @book.post_comments.new(post_comment_params)
+    @comment.book_id = @book.id
+    @comment.user_id = current_user.id
+    @new_comment = PostComment.new
+    @comment.save
+  end
+
+=begin  
     if comment.save
      redirect_to book_path(book)
     else
      flash[:notice] = "can't be blank"
      redirect_to book_path(book)
     end
-  end
+=end
 
   def destroy
     PostComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
-    redirect_to book_path(params[:book_id])
+    #redirect_to book_path(params[:book_id])
   end
 
   private
