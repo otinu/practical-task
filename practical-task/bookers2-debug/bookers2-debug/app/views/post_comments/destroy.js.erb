@@ -1,2 +1,1 @@
-$('#post_comment_index_<%= @book.id %>').html("<%= j(render partial: 'post_comments/post_comment_index', locals: {book: @book, post_comment: @comment}) %>");
-$('#post_comment_form_<%= @book.id %>').html("<%= j(render partial: 'post_comments/post_comment_form', locals: {book: @book, post_comment: @new_comment}) %>");
+$('#post_comment_index_<%= @book.id %>').html("<%= j(render partial: 'post_comments/post_comment_index', locals: {book: @book}) %>");

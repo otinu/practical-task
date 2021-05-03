@@ -19,7 +19,8 @@ class PostCommentsController < ApplicationController
 =end
 
   def destroy
-    PostComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
+    @comment = PostComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
+    @book = Book.find_by(id: params[:book_id]) #対象のコメントを削除した後にrenderするために対象コメントのBOOKを再度取り出す必要がある
     #redirect_to book_path(params[:book_id])
   end
 
