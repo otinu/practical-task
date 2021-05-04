@@ -9,8 +9,18 @@
 10.times do |n|
   name = Faker::Name.name[0...20]
   email    = Faker::Internet.email
+  postcode = rand(1111111..5555555)
+  prefecture_name = "東京都"
+  address_city = "新宿区"
+  address_street = "新宿東ダミーXXX"
   password = "password"
-  User.create!(name: name, email: email, password: password)
+  User.create!(name: name, 
+               email: email,
+               postcode: postcode,
+               prefecture_name: prefecture_name,
+               address_city: address_city,
+               address_street: address_street,
+               password: password)
 end
 
 10.times do |n|
