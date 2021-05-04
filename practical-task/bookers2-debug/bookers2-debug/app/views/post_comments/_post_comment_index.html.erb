@@ -1,13 +1,11 @@
-      <ul>
-       <% book.post_comments.each do |post_comment| %>
-        <li>
-         <%= attachment_image_tag(post_comment.user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg") %>
-         <%= post_comment.comment %>
-         <% if post_comment.user_id == current_user.id %>
-          
-           <%= link_to "　削除", book_post_comment_path(post_comment.book_id, post_comment), method: :delete, remote: true %>
-          
-         <% end %>
-        </li>
-       <% end %>
-      </ul>
+<ul>
+ <% book.post_comments.each do |post_comment| %>
+   <li>
+     <%= attachment_image_tag(post_comment.user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg") %>
+     <%= post_comment.comment %>
+     <% if post_comment.user_id == current_user.id %>
+       <%= link_to "　削除", book_post_comment_path(post_comment.book_id, post_comment), method: :delete, remote: true %>
+     <% end %>
+    </li>
+ <% end %>
+</ul>
