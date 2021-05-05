@@ -46,4 +46,8 @@ class User < ApplicationRecord
    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
   
+  has_many :user_rooms
+  has_many :chats
+  has_many :all_rooms, through: :user_rooms, source: :room
+  
 end
