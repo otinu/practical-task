@@ -39,15 +39,6 @@ class UsersController < ApplicationController
     @users = @user.followers.all
     render 'show_follow'
   end
-  
-  def create
-    @user = User.new(user_params)
-    respond_to do |format|
-      if @user.save
-        UserMailer.with(to: @user.email, name: @user.name).welcome.deliver_now
-        format.html { redirect_to @user, notice: "User was successfully created."
-        format.json { render :show, status: :created, location: @user }
-      end
 
   private
   def user_params
@@ -60,4 +51,6 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
+  
+   
 end

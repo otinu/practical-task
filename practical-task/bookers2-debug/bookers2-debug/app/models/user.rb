@@ -33,6 +33,8 @@ class User < ApplicationRecord
     follows.include?(other_user)
   end
   
+  
+  
   include JpPrefecture
   jp_prefecture :prefecture_code
   

@@ -1,6 +1,8 @@
 class ThanksMailer < ApplicationMailer
-  def welcome
-    @name = params[:name]
-    mail(to: params[:to], subject: "登録完了")
+
+  
+  def send_signup_email(email, name)
+    @name = name
+    mail to: email, subject: 'Registration Complete! Thanks for Joining!'
   end
 end
