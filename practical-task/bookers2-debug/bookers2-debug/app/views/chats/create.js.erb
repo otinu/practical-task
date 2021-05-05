@@ -1,2 +1,4 @@
-$('.message').append("<p style='text-align: left;'><%= @chat.message %></p>");
+$('.message').append("<p><%= @chat.message %></p>");
+
+<!-- フォームの中身を空にする -->
 $('input[type=text]').val("")

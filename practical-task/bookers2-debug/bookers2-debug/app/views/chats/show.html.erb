@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-6">
-            <h2 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>"><%= @user.name %> さんとのチャット</h2>
+            <h2 id="room"><%= @user.name %> さんとのチャット</h2>
 
             <table class="message table">
               <thead>
@@ -10,7 +10,7 @@
                   <th style="text-align: right; font-size: 20px;"><%= @user.name %></th>
                 </tr>
               </thead>
-              <% @chats.each do |chat| %>
+              <% @chats.each do |chat| %> <!-- eachメソッドによって、tbodyタグは@chatsの中身の数だけ生成される-->
                 <% if chat.user_id == current_user.id %>
                 <tbody>
                   <tr>
@@ -30,6 +30,7 @@
                   </tr>
                 </tbody>
                 <% end %>
+                <!-- この行に、create.js.erbで生成されるpタグが挿しこまれる -->
               <% end %>
             </table>
 
