@@ -18,7 +18,8 @@ class ChatsController < ApplicationController
     end
     #if文の中で定義した@roomに紐づくchatsテーブルのレコードを代入
     @chats = @room.chats
-    #@room.idを代入したChat.newを用意しておく(message送信時のform用)←筆者の表現が合っているか分かりません、、
+    #chats/show.html.erbのチャットの送信フォームの中には、文字を打ち込む窓以外に隠された窓がある <%= f.hidden_field :room_id %>。
+    #隠された窓には、「現在のチャットのid」が強制的に埋め込まれる。
     @chat = Chat.new(room_id: @room.id)
   end
 
