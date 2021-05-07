@@ -1,6 +1,5 @@
 class DailyMailer < ApplicationMailer
-    def daily_send(email)
-        default to: -> { User.pluck(:email) }
-        mail(subject: "Good morning! This is the Daily-Mail!")
+    def confirmation
+        mail(:subject => "確認メール", bcc: User.pluck(:email))
     end
 end
