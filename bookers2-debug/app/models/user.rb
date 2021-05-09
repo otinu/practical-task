@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :introduction, length: { maximum: 50 }
   
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :follows, through: :active_relationships, source: :followed
+  has_many :follows, through: :active_relationships, source: :followed #sorce:〇〇 の部分をRelationshipモデル内でもリレーション(belongs_to)を作る必要あり。
 
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
