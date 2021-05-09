@@ -1,4 +1,8 @@
-<%= form_with(model:[book, post_comment], remote: true) do |f| %>
+<%= form_with(model:[book, post_comment], remote: true) do |f| %> 
   <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
   <%= f.submit "送信する" %>
 <% end %>
+
+<!--模範解答はform_withに対してremote: trueとはしていない。
+　　自分の場合はフォーム全体を非同期処理後に置き換える。そのため、create.js.erbは2行で済む。
+　　模範解答はtext_areaを狙い撃ちして空白にするため、その記述が3行目に必要となる。 -->
