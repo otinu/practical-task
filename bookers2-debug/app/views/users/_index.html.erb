@@ -16,8 +16,8 @@
         <td>
        <% unless current_user == user %>
         <% if current_user.follows?(user) %>
-           <%= form_with(model: current_user.active_relationships.find_by(followed_id: user.id),
-                                                html: { method: :delete }, local: true) do |g| %>
+           <%= form_with(model: current_user.active_relationships.find_by(followed_id: user.id),   #ここの2行だけで、「フォロー〇〇」ボタンを表現している。
+                                                html: { method: :delete }, local: true) do |g| %> <!-- また、処理もここだけで完結している。コントローラは経由しない--
            <%= g.submit "フォロー外す" %>
           <% end %>
         <% else %>
