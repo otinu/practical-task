@@ -4,13 +4,14 @@ class ChatsController < ApplicationController
     @user = User.find(params[:id])
     #Userモデルでthroughを活用したことで、mapメソッドやpluckメソッドを使わずとも「all_rooms」だけでUserモデルとRoomsモデルの多対多を実現。
     rooms = current_user.all_rooms
-    #user_idが@user　且つ　room_idが上で取得したrooms配列の中にある数値のもののみ取得(1個または0個のはずです)
+    
+    #user_idが@user　且つ　room_idが上で取得したrooms配列の中にある数値のもののみ取得(1個または0個のはずです)。
+    # つまり、「UserRoomテーブルの中に相手のidと自分のidが両方入ったレコードはある？」 とfind_byで取りに行っている。
     #find_byで2つ以上のカラムを検索させた場合、全ての条件に一致するレコードが見つからない場合にはnilを返す。
     user_rooms = UserRoom.find_by(user_id: @user.id, room_id: rooms)
 
     if user_rooms.nil? 
-      @room = Room.new
-      @room.save
+      @room = Room.create
       UserRoom.create(user_id: @user.id, room_id: @room.id)
       UserRoom.create(user_id: current_user.id, room_id: @room.id)
     else
