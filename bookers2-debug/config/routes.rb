@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   patch 'users_path' => 'users#show'
   resources :books do
     resources :post_comments, only: [:create, :destroy]
-    resource :favorites, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy] 
+=begin
+resorceを単数形にすると、そのコントローラのidがリクエストに含まれなくなる。
+この場合、favariteのshowやindexページが存在しないため、これで機能する。
+=end
   end
   
   get '/search' => 'search#search'
