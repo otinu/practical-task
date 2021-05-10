@@ -12,7 +12,7 @@ class ChatsController < ApplicationController
 
     if user_rooms.nil? 
       @room = Room.create
-      UserRoom.create(user_id: @user.id, room_id: @room.id)
+      UserRoom.create(user_id: @user.id, room_id: @room.id)         #UserRoomテーブルに2行連続でcreateをするのは、今後は自分も相手も今回のUserRoomレコードを参照できるようにするため。
       UserRoom.create(user_id: current_user.id, room_id: @room.id)
     else
       @room = user_rooms.room
@@ -25,8 +25,7 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = current_user.chats.new(chat_params)
-    @chat.save
+    @chat = current_user.chats.create(chat_params)
   end
 
   private
