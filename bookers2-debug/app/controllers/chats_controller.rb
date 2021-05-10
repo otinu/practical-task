@@ -27,6 +27,27 @@ class ChatsController < ApplicationController
   def create
     @chat = current_user.chats.create(chat_params)
   end
+  
+  def destroy
+    @chat = current_user.chats.find(params[:id]).destroy
+    binding.pry #作りかけ
+  end
+
+=begin  
+    @user = User.find(params[:id])
+    @rooms = current_user.all_rooms
+    @user_rooms = UserRoom.find_by(user_id: @user.id, room_id: @rooms)
+    if @user_rooms.nil? 
+      @room = Room.create
+      UserRoom.create(user_id: @user.id, room_id: @room.id)         #UserRoomテーブルに2行連続でcreateをするのは、今後は自分も相手も今回のUserRoomレコードを参照できるようにするため。
+      UserRoom.create(user_id: current_user.id, room_id: @room.id)
+    else
+      @room = user_rooms.room
+      puts "elseを通りましたよっと◇◇◇◇"
+    end
+    @chats = @room.chats
+  end
+=end
 
   private
   def chat_params
