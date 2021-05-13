@@ -27,4 +27,13 @@ resorceを単数形にすると、そのコントローラのidがリクエス�
   
   get 'chat/:id' => 'chats#show', as: 'chat'
   resources :chats, only: [:create, :destroy]
+  
+=begin
+    
+    下記のようにルーティングをnamespaceでネストしてURLを分岐させることができる。
+       namespace :admin do
+        resources :items
+       end
+=end
+
 end
