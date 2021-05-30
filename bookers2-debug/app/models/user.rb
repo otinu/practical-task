@@ -51,6 +51,6 @@ class User < ApplicationRecord
 
   has_many :user_rooms
   has_many :chats
-  has_many :all_rooms, through: :user_rooms, source: :room
+  has_many :all_rooms, through: :user_rooms, source: :room  #参照するのはuser_roomsテーブルであるものの、「all_roomsをUserは持っている」と捉えることができる。
   
 end

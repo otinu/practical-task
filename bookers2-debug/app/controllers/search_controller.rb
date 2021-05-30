@@ -11,7 +11,7 @@ class SearchController < ApplicationController
   def search_for(how, model, content)
     case how
     when 'match'
-      match(model, content) #matchメソッドはRuby自体にあるものの、本来は正規表現を扱う。ここではwhereメソッドを使いたいから、独自に定義。
+      match(model, content) #matchメソッドはRuby自体にあるものの、本来は正規表現を扱う。ここではwhereメソッドを使いたいから、独自のmatchメソッドを定義。
     when 'forward'
       forward(model, content)
     when 'backward'
