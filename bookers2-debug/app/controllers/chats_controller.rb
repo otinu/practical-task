@@ -3,7 +3,9 @@ class ChatsController < ApplicationController
     #ここでは、@userは「相手」、current_userは「自分」と考えると分かりやすい。
     @user = User.find(params[:id])
     #Userモデルでthroughを活用したことで、mapメソッドやpluckメソッドを使わずとも「all_rooms」だけでUserモデルとRoomsモデルの多対多を実現。
+    #おそらく、この方法だとN + 1問題が発生してしまうから模範解答はpluckメソッドでroom_idのみを取得している。
     rooms = current_user.all_rooms
+   #rooms = current_user.user_rooms.pluck(:room_id)
     
     #user_idが@user　且つ　room_idが上で取得したrooms配列の中にある数値のもののみ取得(1個または0個のはずです)。
     # つまり、「UserRoomテーブルの中に相手のidと自分のidが両方入ったレコードはある？」 とfind_byで取りに行っている。
@@ -30,7 +32,7 @@ class ChatsController < ApplicationController
   
   def destroy
     @chat = current_user.chats.destroy
-    binding.pry #作りかけ
+    binding.pry #作りかけ　少し調べたところ、チャットでも論理削除を使用する？
   end
 
 =begin  
@@ -43,7 +45,7 @@ class ChatsController < ApplicationController
       UserRoom.create(user_id: current_user.id, room_id: @room.id)
     else
       @room = user_rooms.room
-      puts "elseを通りましたよっと◇◇◇◇"
+      puts "elseを通りました"
     end
     @chats = @room.chats
   end
